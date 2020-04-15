@@ -5,6 +5,10 @@ VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpworkPdfGenerator.App", "UpworkPdfGenerator.App\UpworkPdfGenerator.App.csproj", "{2E37195F-BA4E-446E-B565-21D2B62C0844}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpworkPdfGenerator.Lib", "UpworkPdfGenerator.Lib\UpworkPdfGenerator.Lib.csproj", "{F67A736B-2963-41BF-A45F-81072675DD42}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpworkPdfGenerator.Tests", "UpworkPdfGenerator.Tests\UpworkPdfGenerator.Tests.csproj", "{B4E1A214-50A0-4B3B-A678-11D72CAA94FF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{2E37195F-BA4E-446E-B565-21D2B62C0844}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2E37195F-BA4E-446E-B565-21D2B62C0844}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2E37195F-BA4E-446E-B565-21D2B62C0844}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F67A736B-2963-41BF-A45F-81072675DD42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F67A736B-2963-41BF-A45F-81072675DD42}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F67A736B-2963-41BF-A45F-81072675DD42}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F67A736B-2963-41BF-A45F-81072675DD42}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B4E1A214-50A0-4B3B-A678-11D72CAA94FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4E1A214-50A0-4B3B-A678-11D72CAA94FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4E1A214-50A0-4B3B-A678-11D72CAA94FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4E1A214-50A0-4B3B-A678-11D72CAA94FF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
