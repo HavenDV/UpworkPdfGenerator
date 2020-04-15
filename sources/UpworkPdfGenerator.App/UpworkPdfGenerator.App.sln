@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30011.22
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpworkPdfGenerator.App", "UpworkPdfGenerator.App\UpworkPdfGenerator.App.csproj", "{2E37195F-BA4E-446E-B565-21D2B62C0844}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2E37195F-BA4E-446E-B565-21D2B62C0844}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E37195F-BA4E-446E-B565-21D2B62C0844}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E37195F-BA4E-446E-B565-21D2B62C0844}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E37195F-BA4E-446E-B565-21D2B62C0844}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {32E687D3-028C-444A-B14B-6F2FCC22F0A3}
+	EndGlobalSection
+EndGlobal
