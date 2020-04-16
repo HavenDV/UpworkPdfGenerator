@@ -3,17 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpworkPdfGenerator.App", "UpworkPdfGenerator.App\UpworkPdfGenerator.App.csproj", "{2E37195F-BA4E-446E-B565-21D2B62C0844}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UpworkPdfGenerator.App", "UpworkPdfGenerator.App\UpworkPdfGenerator.App.csproj", "{2E37195F-BA4E-446E-B565-21D2B62C0844}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpworkPdfGenerator.Lib", "UpworkPdfGenerator.Lib\UpworkPdfGenerator.Lib.csproj", "{F67A736B-2963-41BF-A45F-81072675DD42}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UpworkPdfGenerator.Lib", "UpworkPdfGenerator.Lib\UpworkPdfGenerator.Lib.csproj", "{F67A736B-2963-41BF-A45F-81072675DD42}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpworkPdfGenerator.Tests", "UpworkPdfGenerator.Tests\UpworkPdfGenerator.Tests.csproj", "{B4E1A214-50A0-4B3B-A678-11D72CAA94FF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UpworkPdfGenerator.Tests", "UpworkPdfGenerator.Tests\UpworkPdfGenerator.Tests.csproj", "{B4E1A214-50A0-4B3B-A678-11D72CAA94FF}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{54DF06FE-E35B-4AB1-A2CF-0CCA939BE3A2}"
 	ProjectSection(SolutionItems) = preProject
-		..\..\.gitattributes = ..\..\.gitattributes
-		..\..\.gitignore = ..\..\.gitignore
-		..\..\README.md = ..\..\README.md
+		..\.gitattributes = ..\.gitattributes
+		..\.gitignore = ..\.gitignore
+		..\README.md = ..\README.md
 	EndProjectSection
 EndProject
 Global
