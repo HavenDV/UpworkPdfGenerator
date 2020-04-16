@@ -15,7 +15,7 @@ public void GenerateTest()
     PdfGenerator.GenerateConfirmationOfServicesForm(
         destinationStream,
         signPngBytes,
-        "ИП Стуков Константин Михайлович",
+        "РРџ РЎС‚СѓРєРѕРІ РљРѕРЅСЃС‚Р°РЅС‚РёРЅ РњРёС…Р°Р№Р»РѕРІРёС‡",
         "Stukov Konstantin Mihaylovich (Individual entrepreneur)",
         1757.44,
         date);
