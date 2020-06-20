@@ -32,9 +32,10 @@ namespace UpworkPdfGenerator.Tests
 
             File.WriteAllBytes(path, bytes);
 
-            Process.Start(
-                $"{Environment.GetEnvironmentVariable("LOCALAPPDATA")}\\Google\\Chrome\\Application\\chrome.exe", 
-                $"\"{path}\"");
+            Process.Start(new ProcessStartInfo("chrome.exe", $"\"{path}\"")
+            {
+                UseShellExecute = true,
+            });
         }
     }
 }
