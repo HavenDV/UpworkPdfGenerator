@@ -20,9 +20,9 @@ namespace UpworkPdfGenerator.Tests
             PdfGenerator.GenerateConfirmationOfServicesForm(
                 destinationStream,
                 signPngBytes,
-                "ИП Стуков Константин Михайлович",
+                "РРџ РЎС‚СѓРєРѕРІ РљРѕРЅСЃС‚Р°РЅС‚РёРЅ РњРёС…Р°Р№Р»РѕРІРёС‡",
                 "Stukov Konstantin Mihaylovich (Individual entrepreneur)",
-                1757.44,
+                468.17,
                 date);
 
             var bytes = destinationStream.ToArray();
