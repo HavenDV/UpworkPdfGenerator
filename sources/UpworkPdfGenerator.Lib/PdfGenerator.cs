@@ -37,7 +37,7 @@ namespace UpworkPdfGenerator.Lib
                     .BeginText()
                     .SetFontAndSize(font, 11)
                     .MoveText(100, 657)
-                    .ShowText($"{date:dd MMMM yyyy}")
+                    .ShowText($"{date.Value.ToString("dd MMMM yyyy", CultureInfo.GetCultureInfo("ru-RU"))}")
                     .MoveText(-30, -100)
                     .ShowText(contractorRus)
                     .MoveText(314, -233)
