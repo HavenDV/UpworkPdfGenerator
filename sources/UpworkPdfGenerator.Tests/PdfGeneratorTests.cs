@@ -22,7 +22,7 @@ namespace UpworkPdfGenerator.Tests
                 signPngBytes,
                 "ИП Стуков Константин Михайлович",
                 "Stukov Konstantin Mihaylovich (Individual entrepreneur)",
-                468.17,
+                1278.14,
                 date);
 
             var bytes = destinationStream.ToArray();

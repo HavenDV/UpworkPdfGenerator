@@ -4,8 +4,17 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-
+        Title="Pdf Generator" Height="201" Width="813">
+    <Grid VerticalAlignment="Top">
+        <Label Content="Sign:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="SignTextBox" HorizontalAlignment="Left" Margin="136,14,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="625"/>
+        <Button Content="..." HorizontalAlignment="Left" Margin="766,10,0,0" VerticalAlignment="Top" Width="24" Height="26"/>
+        <Label Content="Contractor(rus):" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="ContractorRusTextBox" HorizontalAlignment="Left" Margin="136,44,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="625"/>
+        <Label Content="Contractor(eng):" HorizontalAlignment="Left" Margin="10,70,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="ContractorEngTextBox" HorizontalAlignment="Left" Margin="136,74,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="625"/>
+        <Label Content="Value:" HorizontalAlignment="Left" Margin="10,100,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="ValueTextBox" HorizontalAlignment="Left" Margin="136,104,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="625"/>
+        <Button Content="Create" HorizontalAlignment="Left" Margin="279,137,0,0" VerticalAlignment="Top" Width="267" Click="Button_Click"/>
     </Grid>
 </Window>
