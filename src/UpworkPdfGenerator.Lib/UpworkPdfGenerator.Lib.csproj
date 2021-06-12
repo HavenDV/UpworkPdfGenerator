@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="itext7" Version="7.1.12" />
+    <PackageReference Include="itext7" Version="7.1.15" />
   </ItemGroup>
 
 </Project>

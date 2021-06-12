@@ -29,7 +29,7 @@ namespace UpworkPdfGenerator.Lib
                 new PdfReader(sourceStream), 
                 new PdfWriter(destinationStream));
             var fontBytes = ResourcesUtilities.ReadFileAsBytes("Times New Roman Cyrillic.ttf");
-            var font = PdfFontFactory.CreateFont(fontBytes, "Cp1251", true);
+            var font = PdfFontFactory.CreateFont(fontBytes, "Cp1251", PdfFontFactory.EmbeddingStrategy.FORCE_EMBEDDED);
 
             {
                 var canvas = new PdfCanvas(document.GetFirstPage());
@@ -47,7 +47,7 @@ namespace UpworkPdfGenerator.Lib
                     .EndText();
 
                 canvas
-                    .AddImage(
+                    .AddImageFittedIntoRectangle(
                         ImageDataFactory.CreatePng(signBytes), 
                         new Rectangle(65, 210, 50, 50), 
                         true);
@@ -69,7 +69,7 @@ namespace UpworkPdfGenerator.Lib
                     .EndText();
 
                 canvas
-                    .AddImage(
+                    .AddImageFittedIntoRectangle(
                         ImageDataFactory.CreatePng(signBytes),
                         new Rectangle(65, 245, 50, 50),
                         true);
