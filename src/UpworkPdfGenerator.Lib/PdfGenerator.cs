@@ -19,7 +19,7 @@ namespace UpworkPdfGenerator.Lib
             byte[] signBytes,
             string contractorRus,
             string contractorEnd,
-            double value,
+            double amount,
             DateTime? date = null)
         {
             date ??= DateTime.UtcNow;
@@ -36,13 +36,13 @@ namespace UpworkPdfGenerator.Lib
                 canvas
                     .BeginText()
                     .SetFontAndSize(font, 11)
-                    .MoveText(100, 657)
+                    .MoveText(100, 659)
                     .ShowText($"{date.Value.ToString("dd MMMM yyyy", CultureInfo.GetCultureInfo("ru-RU"))}")
                     .MoveText(-30, -100)
                     .ShowText(contractorRus)
-                    .MoveText(314, -233)
-                    .ShowText($"{value:N}")
-                    .MoveText(-317, -128)
+                    .MoveText(316, -222)
+                    .ShowText($"{amount:N}")
+                    .MoveText(-317, -140)
                     .ShowText(contractorRus)
                     .EndText();
 
@@ -58,20 +58,20 @@ namespace UpworkPdfGenerator.Lib
                 canvas
                     .BeginText()
                     .SetFontAndSize(font, 11)
-                    .MoveText(100, 662)
+                    .MoveText(100, 672)
                     .ShowText(date.Value.ToString("MMMM dd, yyyy", CultureInfo.InvariantCulture))
                     .MoveText(-30, -90)
                     .ShowText(contractorEnd)
-                    .MoveText(266, -184)
-                    .ShowText(value.ToString("N", CultureInfo.InvariantCulture))
-                    .MoveText(-270, -175)
+                    .MoveText(270, -177)
+                    .ShowText(amount.ToString("N", CultureInfo.InvariantCulture))
+                    .MoveText(-270, -185)
                     .ShowText(contractorEnd)
                     .EndText();
 
                 canvas
                     .AddImage(
                         ImageDataFactory.CreatePng(signBytes),
-                        new Rectangle(65, 225, 50, 50),
+                        new Rectangle(65, 245, 50, 50),
                         true);
             }
         }

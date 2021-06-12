@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Data\Confirmation of Services Form.pdf" />
+    <EmbeddedResource Include="$(SolutionDir)docs\Confirmation of Services Form.pdf" />
     <EmbeddedResource Include="Data\Times New Roman Cyrillic.ttf" />
   </ItemGroup>
 
