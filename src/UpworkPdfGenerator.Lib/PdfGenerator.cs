@@ -6,7 +6,6 @@ using iText.Kernel.Font;
 using iText.Kernel.Geom;
 using iText.Kernel.Pdf;
 using iText.Kernel.Pdf.Canvas;
-using UpworkPdfGenerator.Lib.Utilities;
 
 #nullable enable
 
@@ -24,11 +23,11 @@ namespace UpworkPdfGenerator.Lib
         {
             date ??= DateTime.UtcNow;
 
-            using var sourceStream = ResourcesUtilities.ReadFileAsStream("Confirmation of Services Form.pdf");
+            using var sourceStream = H.Resources.Confirmation_of_Services_Form;
             using var document = new PdfDocument(
                 new PdfReader(sourceStream), 
                 new PdfWriter(destinationStream));
-            var fontBytes = ResourcesUtilities.ReadFileAsBytes("Times New Roman Cyrillic.ttf");
+            var fontBytes = H.Resources.Times_New_Roman_Cyrillic;
             var font = PdfFontFactory.CreateFont(fontBytes, "Cp1251", PdfFontFactory.EmbeddingStrategy.FORCE_EMBEDDED);
 
             {

@@ -1,22 +1,23 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <LangVersion>8</LangVersion>
+    <LangVersion>preview</LangVersion>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Data\Confirmation of Services Form.pdf" />
-    <None Remove="Times New Roman Cyrillic.ttf" />
-  </ItemGroup>
-
-  <ItemGroup>
     <EmbeddedResource Include="$(SolutionDir)docs\Confirmation of Services Form.pdf" />
     <EmbeddedResource Include="Data\Times New Roman Cyrillic.ttf" />
+    <AdditionalFiles Include="$(SolutionDir)docs\Confirmation of Services Form.pdf" HResourcesGenerator_Type="Stream" />
+    <AdditionalFiles Include="Data\Times New Roman Cyrillic.ttf" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="H.Resources.Generator" Version="1.1.4">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="itext7" Version="7.1.15" />
   </ItemGroup>
 
