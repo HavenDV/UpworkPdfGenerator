@@ -23,28 +23,23 @@
             TargetType="TextBox"
             BasedOn="{StaticResource MaterialDesignFloatingHintTextBox}"
             >
-            <Setter Property="Margin" Value="3"/>
+            <Setter Property="Margin" Value="5"/>
         </Style>
         <Style
             TargetType="Button"
             BasedOn="{StaticResource MaterialDesignRaisedDarkButton}"
             >
-            <Setter Property="Margin" Value="3"/>
+            <Setter Property="Margin" Value="5"/>
         </Style>
     </Window.Resources>
 
-    <Grid>
-        <Border Name="MaskBorder" Background="White" CornerRadius="10"/>
-        <StackPanel Background="{DynamicResource MaterialDesignPaper}">
-            <StackPanel.OpacityMask>
-                <VisualBrush Visual="{Binding ElementName=MaskBorder}"/>
-            </StackPanel.OpacityMask>
-            
-            <Grid
-                x:Name="TitleGrid"
-                MouseDown="TitleGrid_MouseDown"
-                Background="{DynamicResource MaterialDesignCardBackground}"
-                >
+    <StackPanel>
+        <Border
+            CornerRadius="10,10,0,0"
+            Background="{DynamicResource MaterialDesignCardBackground}"
+            MouseDown="Title_MouseDown"
+            >
+            <Grid>
                 <TextBlock
                     Text="Upwork PDF Generator"
                     Foreground="White"
@@ -63,26 +58,33 @@
                     </Button>
                 </StackPanel>
             </Grid>
-            <TextBox
-                x:Name="SignTextBox"
-                material:HintAssist.Hint="Sign:"
-                />
-            <TextBox
-                x:Name="ContractorRusTextBox"
-                material:HintAssist.Hint="Contractor(rus):"
-                />
-            <TextBox
-                x:Name="ContractorEngTextBox"
-                material:HintAssist.Hint="Contractor(eng):"
-                />
-            <TextBox
-                x:Name="ValueTextBox"
-                material:HintAssist.Hint="Value:"
-                />
-            <Button
-                Content="Create"
-                Click="Button_Click"
-                />
-        </StackPanel>
-    </Grid>
+        </Border>
+        <Border
+            CornerRadius="0,0,10,10"
+            Background="{DynamicResource MaterialDesignPaper}"
+            >
+            <StackPanel>
+                <TextBox
+                    x:Name="SignTextBox"
+                    material:HintAssist.Hint="Sign:"
+                    />
+                <TextBox
+                    x:Name="ContractorRusTextBox"
+                    material:HintAssist.Hint="Contractor(rus):"
+                    />
+                <TextBox
+                    x:Name="ContractorEngTextBox"
+                    material:HintAssist.Hint="Contractor(eng):"
+                    />
+                <TextBox
+                    x:Name="ValueTextBox"
+                    material:HintAssist.Hint="Value:"
+                    />
+                <Button
+                    Content="Create"
+                    Click="Button_Click"
+                    />
+            </StackPanel>
+        </Border>
+    </StackPanel>
 </Window>

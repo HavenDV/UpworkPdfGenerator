@@ -65,7 +65,7 @@ public partial class MainWindow
         Close();
     }
 
-    private void TitleGrid_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+    private void Title_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
     {
         DragMove();
     }
