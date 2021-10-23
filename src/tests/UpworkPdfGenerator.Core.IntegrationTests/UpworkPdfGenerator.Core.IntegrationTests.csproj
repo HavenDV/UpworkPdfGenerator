@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\UpworkPdfGenerator.Lib\UpworkPdfGenerator.Lib.csproj" />
+    <ProjectReference Include="..\..\libs\UpworkPdfGenerator.Core\UpworkPdfGenerator.Core.csproj" />
   </ItemGroup>
 
 </Project>

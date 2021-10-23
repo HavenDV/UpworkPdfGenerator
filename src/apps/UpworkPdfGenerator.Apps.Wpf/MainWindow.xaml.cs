@@ -2,9 +2,9 @@
 using System.Globalization;
 using System.IO;
 using UpworkPdfGenerator.App.Properties;
-using UpworkPdfGenerator.Lib;
+using UpworkPdfGenerator.Core;
 
-namespace UpworkPdfGenerator.App;
+namespace UpworkPdfGenerator.Apps;
 
 public partial class MainWindow
 {

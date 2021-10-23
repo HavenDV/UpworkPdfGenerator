@@ -5,7 +5,7 @@ using iText.Kernel.Geom;
 using iText.Kernel.Pdf;
 using iText.Kernel.Pdf.Canvas;
 
-namespace UpworkPdfGenerator.Lib;
+namespace UpworkPdfGenerator.Core;
 
 public class PdfGenerator
 {

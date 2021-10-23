@@ -1,8 +1,7 @@
 using System.Diagnostics;
 using System.Globalization;
-using UpworkPdfGenerator.Lib;
 
-namespace UpworkPdfGenerator.Tests;
+namespace UpworkPdfGenerator.Core.Tests;
 
 [TestClass]
 public class PdfGeneratorTests
