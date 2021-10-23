@@ -6,17 +6,80 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Title="Pdf Generator"
+    Width="800"
+    Height="250"
     >
-    <Grid Margin="5">
-        <Label Content="Sign:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="SignTextBox" HorizontalAlignment="Left" Margin="136,14,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="625"/>
-        <Button Content="..." HorizontalAlignment="Left" Margin="766,10,0,0" VerticalAlignment="Top" Width="24" Height="26"/>
-        <Label Content="Contractor(rus):" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="ContractorRusTextBox" HorizontalAlignment="Left" Margin="136,44,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="625"/>
-        <Label Content="Contractor(eng):" HorizontalAlignment="Left" Margin="10,70,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="ContractorEngTextBox" HorizontalAlignment="Left" Margin="136,74,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="625"/>
-        <Label Content="Value:" HorizontalAlignment="Left" Margin="10,100,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="ValueTextBox" HorizontalAlignment="Left" Margin="136,104,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="625"/>
-        <Button Content="Create" HorizontalAlignment="Left" Margin="279,137,0,0" VerticalAlignment="Top" Width="267" Click="Button_Click"/>
+    <Window.Resources>
+        <Style TargetType="Label">
+            <Setter Property="Margin" Value="3"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="Margin" Value="3"/>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="3"/>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        
+        <Label
+            Grid.Row="0"
+            Grid.Column="0"
+            Content="Sign:"
+            />
+        <TextBox
+            Grid.Row="0"
+            Grid.Column="1"
+            x:Name="SignTextBox"
+            />
+        <Label
+            Grid.Row="1"
+            Grid.Column="0"
+            Content="Contractor(rus):"
+            />
+        <TextBox
+            Grid.Row="1"
+            Grid.Column="1"
+            x:Name="ContractorRusTextBox"
+            />
+        <Label
+            Grid.Row="2"
+            Grid.Column="0"
+            Content="Contractor(eng):"
+            />
+        <TextBox
+            Grid.Row="2"
+            Grid.Column="1"
+            x:Name="ContractorEngTextBox"
+            />
+        <Label
+            Grid.Row="3"
+            Grid.Column="0"
+            Content="Value:"
+            />
+        <TextBox
+            Grid.Row="3"
+            Grid.Column="1"
+            x:Name="ValueTextBox"
+            />
+        <Button
+            Grid.Row="4"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            Content="Create"
+            Click="Button_Click"
+            />
     </Grid>
 </Window>
