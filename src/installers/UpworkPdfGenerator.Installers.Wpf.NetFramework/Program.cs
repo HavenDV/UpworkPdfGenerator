@@ -46,8 +46,8 @@ internal class Program
                 {
                     Shortcuts = new[]
                     {
-                            new FileShortcut(ApplicationName, "%ProgramMenu%"),
-                            new FileShortcut(ApplicationName, "%Desktop%")
+                        new FileShortcut(ApplicationName, "%ProgramMenu%"),
+                        new FileShortcut(ApplicationName, "%Desktop%"),
                     }
                 })
             //new LaunchApplicationFromExitDialog("EXE_ID", $"Launch {ApplicationName}")
@@ -64,8 +64,8 @@ internal class Program
                 UrlUpdateInfo = $"{RepositoryUrl}blob/master/README.md",
                 Contact = Contact,
             },
-            UI = WUI.WixUI_InstallDir,
-            Version = typeof(Program).Assembly.GetName().Version,
+                UI = WUI.WixUI_InstallDir,
+                Version = typeof(Program).Assembly.GetName().Version,
             MajorUpgrade = MajorUpgrade.Default,
             Properties = new[]
             {
