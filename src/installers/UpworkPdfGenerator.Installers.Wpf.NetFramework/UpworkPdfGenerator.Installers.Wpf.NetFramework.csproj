@@ -1,0 +1,41 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net4.6.1</TargetFramework>
+    <OutputType>Exe</OutputType>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Release">
+    <BUILD_NUMBER Condition="'$(BUILD_NUMBER)' == ''">1</BUILD_NUMBER>
+    <Version>1.0.$(BUILD_NUMBER)</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="*.msi" />
+    <None Remove="*.exe" />
+    <None Remove="*.wixpdb" />
+    <None Remove="*.wxs" />
+    <None Remove="*.wixobj" />
+    <None Remove="*.cmd" />
+    <None Remove="*.dll" />
+    <None Remove="*.config" />
+    <None Remove="*.pdb" />
+    <None Remove="wix\**" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net4.6.1' ">
+    <Reference Include="System.Net.Http" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="WixSharp" Version="1.18.0" />
+    <PackageReference Include="WixSharp.wix.bin" Version="3.11.2" />
+  </ItemGroup>
+  
+  <Target Name="CheckDebugMode" BeforeTargets="Compile" Condition="'$(ConfigurationName)' != 'Release'">
+    <Message Text="##########################################################################################################" Importance="High" />
+    <Message Text="#  WARNING: You are in DEBUG mode. The installer was created from old Release files or not created at all." Importance="High" />
+    <Message Text="##########################################################################################################" Importance="High" />
+  </Target>
+  
+</Project>

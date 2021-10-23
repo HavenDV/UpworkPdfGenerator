@@ -261,3 +261,5 @@ __pycache__/
 *.pyc
 /MigrationBackup/
 
+/src/installers/UpworkPdfGenerator.Installers.Wpf.NetFramework/wix/*.g.wxs
+/src/installers/UpworkPdfGenerator.Installers.Wpf.NetFramework/*.msi
