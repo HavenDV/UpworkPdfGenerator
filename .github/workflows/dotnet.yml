@@ -1,0 +1,11 @@
+﻿name: Build, test and release
+on: [ push ]
+
+jobs:
+  build-test-publish:
+    name: Build, test and publish
+    uses: HavenDV/workflows/.github/workflows/dotnet_build-test-release.yml@main
+    with:
+      run-tests: false
+      asset-path: src/installers/UpworkPdfGenerator.Installers.Wpf.NetFramework/UpworkPdfGenerator.msi
+      asset-name: UpworkPdfGenerator.msi
