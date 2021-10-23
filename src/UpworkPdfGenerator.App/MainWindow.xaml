@@ -12,9 +12,11 @@
     WindowStartupLocation="CenterScreen"
     TextElement.FontSize="18"
     TextElement.Foreground="{DynamicResource MaterialDesignBody}"
-    Background="{DynamicResource MaterialDesignPaper}"
     FontFamily="{DynamicResource MaterialDesignFont}"
-    WindowStyle="ToolWindow"
+    Background="Transparent"
+    AllowsTransparency="True"
+    ResizeMode="NoResize"
+    WindowStyle="None"
     >
     <Window.Resources>
         <Style
@@ -30,26 +32,57 @@
             <Setter Property="Margin" Value="3"/>
         </Style>
     </Window.Resources>
-    <StackPanel>
-        <TextBox
-            x:Name="SignTextBox"
-            material:HintAssist.Hint="Sign:"
-            />
-        <TextBox
-            x:Name="ContractorRusTextBox"
-            material:HintAssist.Hint="Contractor(rus):"
-            />
-        <TextBox
-            x:Name="ContractorEngTextBox"
-            material:HintAssist.Hint="Contractor(eng):"
-            />
-        <TextBox
-            x:Name="ValueTextBox"
-            material:HintAssist.Hint="Value:"
-            />
-        <Button
-            Content="Create"
-            Click="Button_Click"
-            />
-    </StackPanel>
+
+    <Grid>
+        <Border Name="MaskBorder" Background="White" CornerRadius="10"/>
+        <StackPanel Background="{DynamicResource MaterialDesignPaper}">
+            <StackPanel.OpacityMask>
+                <VisualBrush Visual="{Binding ElementName=MaskBorder}"/>
+            </StackPanel.OpacityMask>
+            
+            <Grid
+                x:Name="TitleGrid"
+                MouseDown="TitleGrid_MouseDown"
+                Background="{DynamicResource MaterialDesignCardBackground}"
+                >
+                <TextBlock
+                    Text="Upwork PDF Generator"
+                    Foreground="White"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    />
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button
+                        Style="{StaticResource MaterialDesignIconButton}"
+                        Width="25"
+                        Height="25"
+                        Foreground="White"
+                        Click="CloseButton_Click"
+                        >
+                        <material:PackIcon Kind="Close"/>
+                    </Button>
+                </StackPanel>
+            </Grid>
+            <TextBox
+                x:Name="SignTextBox"
+                material:HintAssist.Hint="Sign:"
+                />
+            <TextBox
+                x:Name="ContractorRusTextBox"
+                material:HintAssist.Hint="Contractor(rus):"
+                />
+            <TextBox
+                x:Name="ContractorEngTextBox"
+                material:HintAssist.Hint="Contractor(eng):"
+                />
+            <TextBox
+                x:Name="ValueTextBox"
+                material:HintAssist.Hint="Value:"
+                />
+            <Button
+                Content="Create"
+                Click="Button_Click"
+                />
+        </StackPanel>
+    </Grid>
 </Window>

@@ -59,4 +59,14 @@ public partial class MainWindow
             UseShellExecute = true,
         });
     }
+
+    private void CloseButton_Click(object sender, System.Windows.RoutedEventArgs e)
+    {
+        Close();
+    }
+
+    private void TitleGrid_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+    {
+        DragMove();
+    }
 }
