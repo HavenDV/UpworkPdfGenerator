@@ -1,6 +1,5 @@
 using System.Diagnostics;
 using System.Globalization;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using UpworkPdfGenerator.Lib;
 
 namespace UpworkPdfGenerator.Tests;
