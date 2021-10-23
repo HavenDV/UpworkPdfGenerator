@@ -5,18 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="$(SolutionDir)docs\Confirmation of Services Form.pdf" />
-    <EmbeddedResource Include="Data\Times New Roman Cyrillic.ttf" />
-    <AdditionalFiles Include="$(SolutionDir)docs\Confirmation of Services Form.pdf" HResourcesGenerator_Type="Stream" />
-    <AdditionalFiles Include="Data\Times New Roman Cyrillic.ttf" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="H.Resources.Generator" Version="1.1.4">
+    <PackageReference Include="H.Resources.Generator" Version="1.2.20">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="itext7" Version="7.1.15" />
+    <PackageReference Include="itext7" Version="7.1.16" />
   </ItemGroup>
 
 </Project>

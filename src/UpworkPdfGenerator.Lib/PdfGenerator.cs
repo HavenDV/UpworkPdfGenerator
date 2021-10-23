@@ -19,11 +19,11 @@ public class PdfGenerator
     {
         date ??= DateTime.UtcNow;
 
-        using var sourceStream = H.Resources.Confirmation_of_Services_Form;
+        using var sourceStream = H.Resources.Confirmation_of_Services_Form_pdf.AsStream();
         using var document = new PdfDocument(
             new PdfReader(sourceStream),
             new PdfWriter(destinationStream));
-        var fontBytes = H.Resources.Times_New_Roman_Cyrillic;
+        var fontBytes = H.Resources.Times_New_Roman_Cyrillic_ttf.AsBytes();
         var font = PdfFontFactory.CreateFont(fontBytes, "Cp1251", PdfFontFactory.EmbeddingStrategy.FORCE_EMBEDDED);
 
         {
