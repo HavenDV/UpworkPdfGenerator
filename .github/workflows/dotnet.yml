@@ -8,5 +8,5 @@ jobs:
     with:
       os: windows-latest
       run-tests: false
-      files: |
-        src/installers/UpworkPdfGenerator.Installers.Wpf.NetFramework/UpworkPdfGenerator.msi
+      asset-path1: src/installers/UpworkPdfGenerator.Installers.Wpf.NetFramework/UpworkPdfGenerator.msi
+      asset-name1: UpworkPdfGenerator.msi
