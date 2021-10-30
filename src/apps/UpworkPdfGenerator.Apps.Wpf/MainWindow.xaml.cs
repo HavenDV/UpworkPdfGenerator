@@ -37,7 +37,9 @@ public partial class MainWindow
         settings.Save();
 
         using var destinationStream = new MemoryStream();
-        var signPngBytes = File.ReadAllBytes(settings.Sign);
+        var signPngBytes = File.Exists(settings.Sign)
+            ? File.ReadAllBytes(settings.Sign)
+            : Array.Empty<byte>();
 
         var date = DateTime.UtcNow;
         PdfGenerator.GenerateConfirmationOfServicesForm(

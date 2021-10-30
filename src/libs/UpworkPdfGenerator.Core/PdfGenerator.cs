@@ -41,11 +41,14 @@ public class PdfGenerator
                 .ShowText(contractorRus)
                 .EndText();
 
-            canvas
-                .AddImageFittedIntoRectangle(
-                    ImageDataFactory.CreatePng(signBytes),
-                    new Rectangle(65, 210, 50, 50),
-                    true);
+            if (signBytes.Any())
+            {
+                canvas
+                    .AddImageFittedIntoRectangle(
+                        ImageDataFactory.CreatePng(signBytes),
+                        new Rectangle(65, 210, 50, 50),
+                        true);
+            }
         }
 
         {
@@ -63,11 +66,14 @@ public class PdfGenerator
                 .ShowText(contractorEnd)
                 .EndText();
 
-            canvas
-                .AddImageFittedIntoRectangle(
-                    ImageDataFactory.CreatePng(signBytes),
-                    new Rectangle(65, 245, 50, 50),
-                    true);
+            if (signBytes.Any())
+            {
+                canvas
+                    .AddImageFittedIntoRectangle(
+                        ImageDataFactory.CreatePng(signBytes),
+                        new Rectangle(65, 245, 50, 50),
+                        true);
+            }
         }
     }
 }
