@@ -64,10 +64,23 @@
             Background="{DynamicResource MaterialDesignPaper}"
             >
             <StackPanel>
-                <TextBox
-                    x:Name="SignTextBox"
-                    material:HintAssist.Hint="Sign:"
-                    />
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBox
+                        Grid.Column="0"
+                        x:Name="SignTextBox"
+                        material:HintAssist.Hint="Path to sign png file:"
+                        />
+                    <Button
+                        Grid.Column="1"
+                        Content="..."
+                        Click="BrowseSignButton_Click"
+                        />
+                </Grid>
                 <TextBox
                     x:Name="ContractorRusTextBox"
                     material:HintAssist.Hint="Contractor(rus):"
@@ -78,7 +91,7 @@
                     />
                 <TextBox
                     x:Name="ValueTextBox"
-                    material:HintAssist.Hint="Value:"
+                    material:HintAssist.Hint="Cost:"
                     />
                 <Button
                     Content="Create"

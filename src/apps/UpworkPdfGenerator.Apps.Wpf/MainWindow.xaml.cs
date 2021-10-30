@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using Microsoft.Win32;
+using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using UpworkPdfGenerator.App.Properties;
@@ -68,5 +69,32 @@ public partial class MainWindow
     private void Title_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
     {
         DragMove();
+    }
+
+    private void BrowseSignButton_Click(object sender, System.Windows.RoutedEventArgs e)
+    {
+        var wildcards = new[] { ".png" }
+                .Select(static extension => $"*{extension}")
+                .ToArray();
+        var filter = $@"PNG Files ({string.Join(", ", wildcards)})|{string.Join(";", wildcards)}";
+
+        var dialog = new OpenFileDialog
+        {
+            CheckFileExists = true,
+            CheckPathExists = true,
+            Filter = filter,
+        };
+        if (dialog.ShowDialog() != true)
+        {
+            return;
+        }
+
+        var path = dialog.FileName;
+
+        SignTextBox.Text = path;
+
+        var settings = Settings.Default;
+        settings.Sign = SignTextBox.Text;
+        settings.Save();
     }
 }
