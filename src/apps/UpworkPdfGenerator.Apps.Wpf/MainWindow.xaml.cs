@@ -21,6 +21,7 @@ public partial class MainWindow
             settings.Save();
         }
 
+        DateDatePicker.SelectedDate = DateTime.UtcNow;
         SignTextBox.Text = settings.Sign;
         ContractorRusTextBox.Text = settings.ContractorRus;
         ContractorEngTextBox.Text = settings.ContractorEng;
@@ -41,7 +42,7 @@ public partial class MainWindow
             ? File.ReadAllBytes(settings.Sign)
             : Array.Empty<byte>();
 
-        var date = DateTime.UtcNow;
+        var date = DateDatePicker.SelectedDate;
         PdfGenerator.GenerateConfirmationOfServicesForm(
             destinationStream,
             signPngBytes,
@@ -53,7 +54,7 @@ public partial class MainWindow
         var bytes = destinationStream.ToArray();
         var path = Path.Combine(
             Path.GetTempPath(),
-            $"Confirmation of Services Form - {date.ToString("MMMM dd, yyyy", CultureInfo.InvariantCulture)}.pdf");
+            $"Confirmation of Services Form - {date?.ToString("MMMM dd, yyyy", CultureInfo.InvariantCulture)}.pdf");
 
         File.WriteAllBytes(path, bytes);
 
