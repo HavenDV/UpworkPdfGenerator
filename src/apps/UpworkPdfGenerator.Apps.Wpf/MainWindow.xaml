@@ -17,6 +17,7 @@
     WindowStartupLocation="CenterScreen"
     WindowStyle="None"
     mc:Ignorable="d"
+    x:Name="Root"
     >
     <Window.Resources>
         <Style
@@ -68,7 +69,7 @@
             >
             <StackPanel>
                 <DatePicker
-                    x:Name="DateDatePicker"
+                    Text="{Binding ViewModel.SelectedDate, ElementName=Root, Mode=TwoWay}"
                     Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
                     material:HintAssist.Hint="Date:"
                     Margin="5"
@@ -80,30 +81,30 @@
                     </Grid.ColumnDefinitions>
 
                     <TextBox
-                        x:Name="SignTextBox"
+                        Text="{Binding ViewModel.Sign, ElementName=Root, Mode=TwoWay}"
                         Grid.Column="0"
                         material:HintAssist.Hint="Path to sign png file:"
                         />
                     <Button
                         Grid.Column="1"
-                        Click="BrowseSignButton_Click"
+                        Command="{Binding ViewModel.BrowseSignCommand, ElementName=Root}"
                         Content="..."
                         />
                 </Grid>
                 <TextBox
-                    x:Name="ContractorRusTextBox"
+                    Text="{Binding ViewModel.ContractorRus, ElementName=Root, Mode=TwoWay}"
                     material:HintAssist.Hint="Contractor(rus):"
                     />
                 <TextBox
-                    x:Name="ContractorEngTextBox"
+                    Text="{Binding ViewModel.ContractorEng, ElementName=Root, Mode=TwoWay}"
                     material:HintAssist.Hint="Contractor(eng):"
                     />
                 <TextBox
-                    x:Name="ValueTextBox"
+                    Text="{Binding ViewModel.Value, ElementName=Root, StringFormat=F2, Mode=TwoWay}"
                     material:HintAssist.Hint="Cost:"
                     />
                 <Button
-                    Click="Button_Click"
+                    Command="{Binding ViewModel.GenerateCommand, ElementName=Root}"
                     Content="Create"
                     />
             </StackPanel>

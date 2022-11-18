@@ -1,67 +1,14 @@
-﻿using Microsoft.Win32;
-using System.Diagnostics;
-using System.Globalization;
-using System.IO;
-using UpworkPdfGenerator.App.Properties;
-using UpworkPdfGenerator.Core;
+﻿using UpworkPdfGenerator.Apps.Wpf;
 
 namespace UpworkPdfGenerator.Apps;
 
 public partial class MainWindow
 {
+    public MainViewModel ViewModel { get; } = new();
+
     public MainWindow()
     {
         InitializeComponent();
-
-        var settings = Settings.Default;
-        if (settings.UpgradeRequired)
-        {
-            settings.Upgrade();
-            settings.UpgradeRequired = false;
-            settings.Save();
-        }
-
-        DateDatePicker.SelectedDate = DateTime.UtcNow;
-        SignTextBox.Text = settings.Sign;
-        ContractorRusTextBox.Text = settings.ContractorRus;
-        ContractorEngTextBox.Text = settings.ContractorEng;
-        ValueTextBox.Text = $"{settings.Value}";
-    }
-
-    private void Button_Click(object sender, System.Windows.RoutedEventArgs e)
-    {
-        var settings = Settings.Default;
-        settings.Sign = SignTextBox.Text;
-        settings.ContractorRus = ContractorRusTextBox.Text;
-        settings.ContractorEng = ContractorEngTextBox.Text;
-        settings.Value = Convert.ToDouble(ValueTextBox.Text);
-        settings.Save();
-
-        using var destinationStream = new MemoryStream();
-        var signPngBytes = File.Exists(settings.Sign)
-            ? File.ReadAllBytes(settings.Sign)
-            : Array.Empty<byte>();
-
-        var date = DateDatePicker.SelectedDate;
-        PdfGenerator.GenerateConfirmationOfServicesForm(
-            destinationStream,
-            signPngBytes,
-            settings.ContractorRus,
-            settings.ContractorEng,
-            settings.Value,
-            date);
-
-        var bytes = destinationStream.ToArray();
-        var path = Path.Combine(
-            Path.GetTempPath(),
-            $"Confirmation of Services Form - {date?.ToString("MMMM dd, yyyy", CultureInfo.InvariantCulture)}.pdf");
-
-        File.WriteAllBytes(path, bytes);
-
-        Process.Start(new ProcessStartInfo("chrome.exe", $"\"{path}\"")
-        {
-            UseShellExecute = true,
-        });
     }
 
     private void CloseButton_Click(object sender, System.Windows.RoutedEventArgs e)
@@ -72,32 +19,5 @@ public partial class MainWindow
     private void Title_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
     {
         DragMove();
-    }
-
-    private void BrowseSignButton_Click(object sender, System.Windows.RoutedEventArgs e)
-    {
-        var wildcards = new[] { ".png" }
-                .Select(static extension => $"*{extension}")
-                .ToArray();
-        var filter = $@"PNG Files ({string.Join(", ", wildcards)})|{string.Join(";", wildcards)}";
-
-        var dialog = new OpenFileDialog
-        {
-            CheckFileExists = true,
-            CheckPathExists = true,
-            Filter = filter,
-        };
-        if (dialog.ShowDialog() != true)
-        {
-            return;
-        }
-
-        var path = dialog.FileName;
-
-        SignTextBox.Text = path;
-
-        var settings = Settings.Default;
-        settings.Sign = SignTextBox.Text;
-        settings.Save();
     }
 }
