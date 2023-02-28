@@ -1,10 +1,10 @@
-﻿using UpworkPdfGenerator.Apps.Wpf;
+﻿using Mvvm.CommonInteractions;
 
 namespace UpworkPdfGenerator.Apps;
 
 public partial class MainWindow
 {
-    public MainViewModel ViewModel { get; } = new();
+    public MainViewModel ViewModel { get; } = new(new FileInteractions(), new WebInteractions());
 
     public MainWindow()
     {

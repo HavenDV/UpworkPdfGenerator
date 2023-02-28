@@ -1,0 +1,64 @@
+﻿<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="UpworkPdfGenerator.Apps.MainPage"
+    Title="Upwork PDF Generator"
+    xmlns:viewModels="clr-namespace:UpworkPdfGenerator.Apps;assembly=UpworkPdfGenerator.Core"
+    x:DataType="viewModels:MainViewModel"
+    >
+    <ContentPage.Resources>
+        <Style TargetType="Entry">
+            <Setter Property="Margin" Value="5" />
+        </Style>
+        <Style TargetType="Label">
+            <Setter Property="Margin" Value="5" />
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="5" />
+        </Style>
+    </ContentPage.Resources>
+
+    <StackLayout>
+        <Border>
+            <StackLayout>
+                <Label Text="Date:" />
+                <DatePicker
+                    Date="{Binding SelectedDate, Mode=TwoWay}"
+                    Margin="5"
+                    />
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <Label
+                        Grid.Column="0"
+                        Text="Path to sign png file:"
+                        />
+                    <Entry
+                        Text="{Binding Sign, Mode=TwoWay}"
+                        Grid.Column="1"
+                        />
+                    <Button
+                        Grid.Column="2"
+                        Command="{Binding BrowseSignCommand}"
+                        Text="..."
+                        />
+                </Grid>
+                <Label Text="Contractor(rus):" />
+                <Entry Text="{Binding ContractorRus, Mode=TwoWay}" />
+                <Label Text="Contractor(eng):" />
+                <Entry Text="{Binding ContractorEng, Mode=TwoWay}" />
+                <Label Text="Cost:" />
+                <Entry Text="{Binding Value, Mode=TwoWay}" />
+                <Button
+                    Command="{Binding GenerateCommand}"
+                    Text="Create"
+                    />
+            </StackLayout>
+        </Border>
+    </StackLayout>
+
+</ContentPage>

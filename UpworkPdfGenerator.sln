@@ -30,6 +30,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UpworkPdfGenerator.Installe
 		{2E37195F-BA4E-446E-B565-21D2B62C0844} = {2E37195F-BA4E-446E-B565-21D2B62C0844}
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpworkPdfGenerator.Apps.Maui", "src\apps\UpworkPdfGenerator.Apps.Maui\UpworkPdfGenerator.Apps.Maui.csproj", "{D84983BD-B465-454C-B278-682B013F45D2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -52,6 +54,10 @@ Global
 		{CFEAEE0B-9380-42E0-8A6B-ED928A77BB72}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CFEAEE0B-9380-42E0-8A6B-ED928A77BB72}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CFEAEE0B-9380-42E0-8A6B-ED928A77BB72}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D84983BD-B465-454C-B278-682B013F45D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D84983BD-B465-454C-B278-682B013F45D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D84983BD-B465-454C-B278-682B013F45D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D84983BD-B465-454C-B278-682B013F45D2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -61,6 +67,7 @@ Global
 		{F67A736B-2963-41BF-A45F-81072675DD42} = {D4AC71E3-4EBD-4658-B578-DCF990827B1C}
 		{B4E1A214-50A0-4B3B-A678-11D72CAA94FF} = {9C09F210-B181-46FB-857E-5C6DE35F9CD5}
 		{CFEAEE0B-9380-42E0-8A6B-ED928A77BB72} = {6950B003-7C56-4AF5-9C6F-47FDF696F32D}
+		{D84983BD-B465-454C-B278-682B013F45D2} = {3F73BAB7-9472-406D-8B95-9F5D194D739F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {32E687D3-028C-444A-B14B-6F2FCC22F0A3}

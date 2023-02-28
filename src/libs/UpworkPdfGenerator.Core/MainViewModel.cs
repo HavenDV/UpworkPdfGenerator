@@ -1,33 +1,39 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Microsoft.Win32;
-using System.Diagnostics;
 using System.Globalization;
-using System.IO;
+using Mvvm.CommonInteractions;
 using UpworkPdfGenerator.App.Properties;
 using UpworkPdfGenerator.Core;
 
-namespace UpworkPdfGenerator.Apps.Wpf;
+namespace UpworkPdfGenerator.Apps;
 
 public partial class MainViewModel : ObservableObject
 {
+    private IFileInteractions FileInteractions { get; }
+    private IWebInteractions WebInteractions { get; }
+    
     [ObservableProperty]
-    public DateTime? _selectedDate;
+    private DateTime? _selectedDate;
 
     [ObservableProperty]
-    public string? _sign;
+    private string _sign = string.Empty;
 
     [ObservableProperty]
-    public string? _contractorRus;
+    private string _contractorRus = string.Empty;
 
     [ObservableProperty]
-    public string? _contractorEng;
+    private string _contractorEng = string.Empty;
 
     [ObservableProperty]
-    public double? _value;
+    private double? _value;
 
-    public MainViewModel()
+    public MainViewModel(
+        IFileInteractions fileInteractions,
+        IWebInteractions webInteractions)
     {
+        FileInteractions = fileInteractions ?? throw new ArgumentNullException(nameof(fileInteractions));
+        WebInteractions = webInteractions ?? throw new ArgumentNullException(nameof(webInteractions));
+        
         var settings = Settings.Default;
         if (settings.UpgradeRequired)
         {
@@ -74,34 +80,24 @@ public partial class MainViewModel : ObservableObject
 
         File.WriteAllBytes(path, bytes);
 
-        Process.Start(new ProcessStartInfo("chrome.exe", $"\"{path}\"")
-        {
-            UseShellExecute = true,
-        });
+        _ = WebInteractions.OpenUrlAsync(new Uri(path));
     }
 
     [RelayCommand]
-    public void BrowseSign()
+    public async Task BrowseSign(CancellationToken cancellationToken = default)
     {
-        var wildcards = new[] { ".png" }
-            .Select(static extension => $"*{extension}")
-            .ToArray();
-        var filter = $@"PNG Files ({string.Join(", ", wildcards)})|{string.Join(";", wildcards)}";
-
-        var dialog = new OpenFileDialog
+        var file = await FileInteractions.OpenFileAsync(new OpenFileArguments
         {
-            CheckFileExists = true,
-            CheckPathExists = true,
-            Filter = filter,
-        };
-        if (dialog.ShowDialog() != true)
+            SuggestedFileName = "sign.png",
+            Extensions = new[] { ".png" },
+            FilterName = "PNG Files",
+        }, cancellationToken).ConfigureAwait(true);
+        if (file == null)
         {
             return;
         }
 
-        var path = dialog.FileName;
-
-        Sign = path;
+        Sign = file.FullPath;
 
         var settings = Settings.Default;
         settings.Sign = Sign;
