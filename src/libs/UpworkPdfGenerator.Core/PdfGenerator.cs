@@ -36,7 +36,7 @@ public class PdfGenerator
                 .MoveText(-30, -100)
                 .ShowText(contractorRus)
                 .MoveText(316, -222)
-                .ShowText($"{amount:N}")
+                .ShowText($"{amount.ToString("F2", CultureInfo.InvariantCulture)}")
                 .MoveText(-317, -140)
                 .ShowText(contractorRus)
                 .EndText();
@@ -61,7 +61,7 @@ public class PdfGenerator
                 .MoveText(-30, -90)
                 .ShowText(contractorEnd)
                 .MoveText(270, -177)
-                .ShowText(amount.ToString("N", CultureInfo.InvariantCulture))
+                .ShowText(amount.ToString("F2", CultureInfo.InvariantCulture))
                 .MoveText(-270, -185)
                 .ShowText(contractorEnd)
                 .EndText();
