@@ -6,6 +6,8 @@ jobs:
     name: Build, test and publish MAUI application
     uses: HavenDV/UpworkPdfGenerator/.github/workflows/maui.yml@master
     with:
+      application-name: UpworkPdfGenerator
       package-name: com.havendv.upworkpdfgenerator
+      path: src/apps/UpworkPdfGenerator.Apps.Maui
     secrets:
       service-account-json: ${{ secrets.SERVICE_ACCOUNT_JSON }}

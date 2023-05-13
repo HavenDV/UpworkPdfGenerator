@@ -2,9 +2,15 @@
 on:
     workflow_call:
         inputs:
+            application-name:
+              required: true
+              type: string
             package-name:
                 required: true
                 type: string
+            path:
+              required: true
+              type: string
     
         secrets:
             service-account-json:
@@ -75,7 +81,7 @@ jobs:
         continue-on-error: true
         if: startsWith(github.event.ref, 'refs/tags/v')
         outputs:
-            upload_url: ${{ steps.create_release.outputs.result }}
+            release_id: ${{ steps.create_release.outputs.result }}
         steps:
             - name: Create Release
               id: create_release
@@ -91,7 +97,7 @@ jobs:
                         generate_release_notes: true,
                       })
                       
-                      return result.data.upload_url
+                      return result.data.id
                   
     publish-android:
         name: Create Android artifacts
@@ -116,6 +122,7 @@ jobs:
 
             - name: Publish
               run: dotnet publish
+                  ${{ inputs.path }}
                   --framework:net7.0-android
                   --configuration Release
                   --nologo
@@ -124,7 +131,7 @@ jobs:
               uses: actions/upload-artifact@v3
               with:
                   name: android
-                  path: src/ParkingManager/bin/Release/net7.0-android/publish/
+                  path: ${{ inputs.path }}/bin/Release/net7.0-android/publish/
     
     publish-android-to-github-releases:
         name: Publish to Github Releases
@@ -135,16 +142,25 @@ jobs:
             - uses: actions/download-artifact@v3
               with:
                   name: android
-    
+
             - name: Upload .apk Asset
-              uses: actions/upload-release-asset@v1
-              env:
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              uses: actions/github-script@v6
               with:
-                  upload_url: ${{ needs.create-github-release.outputs.upload_url }}
-                  asset_path: ${{ inputs.package-name }}-Signed.apk
-                  asset_name: ParkingManager.apk
-                  asset_content_type: application/vnd.android.package-archive
+                  result-encoding: string
+                  script: |
+                      const path = require('path');
+                      const fs = require('fs/promises');
+                    
+                      const asset_path = ${{ inputs.package-name }}-Signed.apk
+                      const data = await fs.readFile(asset_path);
+                    
+                      await octokit.rest.repos.uploadReleaseAsset({
+                        owner: context.repo.owner,
+                        repo: context.repo.repo,
+                        release_id: ${{ needs.create-github-release.outputs.release_id }},
+                        name: path.basename(asset_path),
+                        data: data,
+                      })
     
     publish-android-to-google-play:
         name: Publish to Google Play
@@ -163,7 +179,7 @@ jobs:
                   serviceAccountJsonPlainText: ${{ secrets.service-account-json }}
                   packageName: ${{ inputs.package-name }}
                   releaseFiles: ${{ inputs.package-name }}-Signed.aab
-                  track: production
+                  track: internal
     
 #    publish-ios:
 #        name: Create iOS artifacts
@@ -213,7 +229,7 @@ jobs:
 #                uses: actions/upload-artifact@v3
 #                with:
 #                    name: ios
-#                    path: src/ParkingManager/bin/Release/net7.0-ios/publish/
+#                    path: ${{ inputs.path }}/bin/Release/net7.0-ios/publish/
 #    
 #    publish-ios-to-github-releases:
 #        name: Publish to Github Releases
