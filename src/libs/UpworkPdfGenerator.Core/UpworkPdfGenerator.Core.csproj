@@ -9,13 +9,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.1.0" />
-    <PackageReference Include="H.Resources.Generator" Version="1.2.20">
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.0" />
+    <PackageReference Include="H.Resources.Generator" Version="1.5.1">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="itext7" Version="7.1.16" />
-    <PackageReference Include="Mvvm.CommonInteractions.Core" Version="1.0.64" />
+    <PackageReference Include="itext7" Version="7.2.5" />
+    <PackageReference Include="Mvvm.CommonInteractions.Core" Version="1.0.65" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="7.0.0" />
   </ItemGroup>
 
