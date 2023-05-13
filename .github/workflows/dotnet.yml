@@ -4,6 +4,6 @@ on: [ push ]
 jobs:
   build-test-publish:
     name: Build, test and publish MAUI application
-    uses: HavenDV/UpworkPdfGenerator/.github/workflows/maui.yml@main
+    uses: HavenDV/UpworkPdfGenerator/.github/workflows/maui.yml@master
     with:
       package-name: com.havendv.upworkpdfgenerator
