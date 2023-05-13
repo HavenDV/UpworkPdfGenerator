@@ -6,9 +6,9 @@ on:
                 required: true
                 type: string
     
-    secrets:
-        service-account-json:
-            required: false
+        secrets:
+            service-account-json:
+                required: false
 
 jobs:
     build-and-test:
