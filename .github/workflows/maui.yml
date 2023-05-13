@@ -154,7 +154,7 @@ jobs:
                       const asset_path = '${{ inputs.package-name }}-Signed.apk'
                       const data = await fs.readFile(asset_path);
                     
-                      await octokit.rest.repos.uploadReleaseAsset({
+                      await github.rest.repos.uploadReleaseAsset({
                         owner: context.repo.owner,
                         repo: context.repo.repo,
                         release_id: ${{ needs.create-github-release.outputs.release_id }},
