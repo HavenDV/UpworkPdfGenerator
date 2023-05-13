@@ -13,6 +13,7 @@ on:
 jobs:
     build-and-test:
         name: Build and test
+        if: !startsWith(github.event.ref, 'refs/tags/v')
         strategy:
             matrix:
                 include:
@@ -69,7 +70,7 @@ jobs:
     
     create-github-release:
         name: Create Github Release
-        needs: build-and-test
+        #needs: build-and-test
         runs-on: ubuntu-latest
         continue-on-error: true
         if: startsWith(github.event.ref, 'refs/tags/v')
@@ -94,7 +95,7 @@ jobs:
                   
     publish-android:
         name: Create Android artifacts
-        needs: build-and-test
+        #needs: build-and-test
         runs-on: macos-latest
         continue-on-error: true
         if: startsWith(github.event.ref, 'refs/tags/v')

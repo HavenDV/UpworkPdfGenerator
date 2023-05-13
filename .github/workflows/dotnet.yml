@@ -7,3 +7,5 @@ jobs:
     uses: HavenDV/UpworkPdfGenerator/.github/workflows/maui.yml@master
     with:
       package-name: com.havendv.upworkpdfgenerator
+    secrets:
+      service-account-json: ${{ secrets.SERVICE_ACCOUNT_JSON }}
