@@ -151,7 +151,7 @@ jobs:
                       const path = require('path');
                       const fs = require('fs/promises');
                     
-                      const asset_path = ${{ inputs.package-name }}-Signed.apk
+                      const asset_path = '${{ inputs.package-name }}-Signed.apk'
                       const data = await fs.readFile(asset_path);
                     
                       await octokit.rest.repos.uploadReleaseAsset({
