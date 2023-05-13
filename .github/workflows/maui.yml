@@ -5,6 +5,10 @@ on:
             package-name:
                 required: true
                 type: string
+    
+    secrets:
+        service-account-json:
+            required: false
 
 jobs:
     build-and-test:
@@ -141,31 +145,6 @@ jobs:
                   asset_name: ParkingManager.apk
                   asset_content_type: application/vnd.android.package-archive
     
-    publish-android-to-app-center:
-        name: Publish to App Center
-        needs: publish-android
-        runs-on: ubuntu-latest
-        continue-on-error: true
-        env:
-            APPCENTER_ACCESS_TOKEN: ${{ secrets.APPCENTER_ACCESS_TOKEN }}
-            IS-APPCENTER_ACCESS_TOKEN-AVAILABLE: ${{ !!secrets.APPCENTER_ACCESS_TOKEN }}
-        
-        steps:
-            - uses: actions/download-artifact@v3
-              with:
-                  name: android
-
-            - name: Upload artefacts to App Center
-              uses: wzieba/AppCenter-Github-Action@v1
-              if: env.IS-APPCENTER_ACCESS_TOKEN-AVAILABLE == 'true'
-              with:
-                  appName: havendv/ParkingManager
-                  token: ${{ secrets.APPCENTER_ACCESS_TOKEN }}
-                  group: Testers
-                  file: ${{ inputs.package-name }}-Signed.apk
-                  notifyTesters: true
-                  debug: false
-    
     publish-android-to-google-play:
         name: Publish to Google Play
         needs: publish-android
@@ -180,114 +159,114 @@ jobs:
             - name: Deploy
               uses: r0adkll/upload-google-play@v1
               with:
-                  serviceAccountJsonPlainText: ${{ secrets.SERVICE_ACCOUNT_JSON }}
+                  serviceAccountJsonPlainText: ${{ secrets.service-account-json }}
                   packageName: ${{ inputs.package-name }}
                   releaseFiles: ${{ inputs.package-name }}-Signed.aab
                   track: production
     
-    publish-ios:
-        name: Create iOS artifacts
-        needs: build-and-test
-        runs-on: macos-latest
-        continue-on-error: true
-        if: startsWith(github.event.ref, 'refs/tags/v')
-        steps:
-            -   name: Getting code
-                uses: actions/checkout@v3
-
-            -   name: Cache Nuget Packages
-                uses: actions/cache@v3
-                with:
-                    path: ~/.nuget/packages
-                    key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj*') }}
-                    restore-keys: |
-                        ${{ runner.os }}-nuget-
-
-            -   name: Install workloads
-                run: dotnet workload install maui
-
-            -   name: Import certificates
-                uses: apple-actions/import-codesign-certs@v2
-                with:
-                    p12-file-base64: ${{ secrets.CERTIFICATES_P12_BASE64 }}
-                    p12-password: ${{ secrets.CERTIFICATES_P12_PASSWORD }}
-
-            -   uses: apple-actions/download-provisioning-profiles@v1
-                with:
-                    bundle-id: ${{ inputs.package-name }}
-                    issuer-id: ${{ secrets.APPSTORE_ISSUER_ID }}
-                    api-key-id: ${{ secrets.APPSTORE_KEY_ID }}
-                    api-private-key: ${{ secrets.APPSTORE_PRIVATE_KEY }}
-
-            -   name: Publish
-                run: dotnet publish
-                    --framework:net7.0-ios
-                    --configuration Release
-                    --nologo
-                    /p:ArchiveOnBuild=true
-                    /p:RuntimeIdentifier=ios-arm64
-                    /p:CodesignKey="${{ vars.CODESIGN_KEY }}"
-                    /p:CodesignProvision="${{ vars.CODESIGN_PROVISION }}"
-
-            -   name: Upload artifacts
-                uses: actions/upload-artifact@v3
-                with:
-                    name: ios
-                    path: src/ParkingManager/bin/Release/net7.0-ios/publish/
-    
-    publish-ios-to-github-releases:
-        name: Publish to Github Releases
-        needs: [ create-github-release, publish-ios ]
-        runs-on: ubuntu-latest
-        continue-on-error: true
-        steps:
-            -   uses: actions/download-artifact@v3
-                with:
-                    name: ios
-
-            -   name: Upload .ipa Asset
-                uses: actions/upload-release-asset@v1
-                env:
-                    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-                with:
-                    upload_url: ${{ needs.create-github-release.outputs.upload_url }}
-                    asset_path: ParkingManager.ipa
-                    asset_name: ParkingManager.ipa
-                    asset_content_type: application/octet-stream
-    
-    publish-ios-to-testflight:
-        name: Publish to TestFlight
-        needs: publish-ios
-        runs-on: macos-latest
-        continue-on-error: true
-        steps:
-            -   uses: actions/download-artifact@v3
-                with:
-                    name: ios
-
-            -   name: Upload .ipa Asset
-                uses: Apple-Actions/upload-testflight-build@master
-                with:
-                    app-path: ParkingManager.ipa
-                    issuer-id: ${{ secrets.APPSTORE_ISSUER_ID }}
-                    api-key-id: ${{ secrets.APPSTORE_KEY_ID }}
-                    api-private-key: ${{ secrets.APPSTORE_PRIVATE_KEY }}
-    
-    publish-ios-to-app-store:
-        name: Publish to App Store
-        needs: publish-ios
-        environment: production
-        continue-on-error: true
-        runs-on: macos-latest
-        steps:
-            -   uses: actions/download-artifact@v3
-                with:
-                    name: ios
-
-            -   name: Upload app to App Store Connect
-                run: xcrun altool
-                    --upload-app
-                    -t ios
-                    -f "ParkingManager.ipa"
-                    -u "${{ secrets.APP_STORE_CONNECT_USERNAME }}"
-                    -p "${{ secrets.APP_STORE_CONNECT_PASSWORD }}"
+#    publish-ios:
+#        name: Create iOS artifacts
+#        needs: build-and-test
+#        runs-on: macos-latest
+#        continue-on-error: true
+#        if: startsWith(github.event.ref, 'refs/tags/v')
+#        steps:
+#            -   name: Getting code
+#                uses: actions/checkout@v3
+#
+#            -   name: Cache Nuget Packages
+#                uses: actions/cache@v3
+#                with:
+#                    path: ~/.nuget/packages
+#                    key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj*') }}
+#                    restore-keys: |
+#                        ${{ runner.os }}-nuget-
+#
+#            -   name: Install workloads
+#                run: dotnet workload install maui
+#
+#            -   name: Import certificates
+#                uses: apple-actions/import-codesign-certs@v2
+#                with:
+#                    p12-file-base64: ${{ secrets.CERTIFICATES_P12_BASE64 }}
+#                    p12-password: ${{ secrets.CERTIFICATES_P12_PASSWORD }}
+#
+#            -   uses: apple-actions/download-provisioning-profiles@v1
+#                with:
+#                    bundle-id: ${{ inputs.package-name }}
+#                    issuer-id: ${{ secrets.APPSTORE_ISSUER_ID }}
+#                    api-key-id: ${{ secrets.APPSTORE_KEY_ID }}
+#                    api-private-key: ${{ secrets.APPSTORE_PRIVATE_KEY }}
+#
+#            -   name: Publish
+#                run: dotnet publish
+#                    --framework:net7.0-ios
+#                    --configuration Release
+#                    --nologo
+#                    /p:ArchiveOnBuild=true
+#                    /p:RuntimeIdentifier=ios-arm64
+#                    /p:CodesignKey="${{ vars.CODESIGN_KEY }}"
+#                    /p:CodesignProvision="${{ vars.CODESIGN_PROVISION }}"
+#
+#            -   name: Upload artifacts
+#                uses: actions/upload-artifact@v3
+#                with:
+#                    name: ios
+#                    path: src/ParkingManager/bin/Release/net7.0-ios/publish/
+#    
+#    publish-ios-to-github-releases:
+#        name: Publish to Github Releases
+#        needs: [ create-github-release, publish-ios ]
+#        runs-on: ubuntu-latest
+#        continue-on-error: true
+#        steps:
+#            -   uses: actions/download-artifact@v3
+#                with:
+#                    name: ios
+#
+#            -   name: Upload .ipa Asset
+#                uses: actions/upload-release-asset@v1
+#                env:
+#                    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#                with:
+#                    upload_url: ${{ needs.create-github-release.outputs.upload_url }}
+#                    asset_path: ParkingManager.ipa
+#                    asset_name: ParkingManager.ipa
+#                    asset_content_type: application/octet-stream
+#    
+#    publish-ios-to-testflight:
+#        name: Publish to TestFlight
+#        needs: publish-ios
+#        runs-on: macos-latest
+#        continue-on-error: true
+#        steps:
+#            -   uses: actions/download-artifact@v3
+#                with:
+#                    name: ios
+#
+#            -   name: Upload .ipa Asset
+#                uses: Apple-Actions/upload-testflight-build@master
+#                with:
+#                    app-path: ParkingManager.ipa
+#                    issuer-id: ${{ secrets.APPSTORE_ISSUER_ID }}
+#                    api-key-id: ${{ secrets.APPSTORE_KEY_ID }}
+#                    api-private-key: ${{ secrets.APPSTORE_PRIVATE_KEY }}
+#    
+#    publish-ios-to-app-store:
+#        name: Publish to App Store
+#        needs: publish-ios
+#        environment: production
+#        continue-on-error: true
+#        runs-on: macos-latest
+#        steps:
+#            -   uses: actions/download-artifact@v3
+#                with:
+#                    name: ios
+#
+#            -   name: Upload app to App Store Connect
+#                run: xcrun altool
+#                    --upload-app
+#                    -t ios
+#                    -f "ParkingManager.ipa"
+#                    -u "${{ secrets.APP_STORE_CONNECT_USERNAME }}"
+#                    -p "${{ secrets.APP_STORE_CONNECT_PASSWORD }}"
