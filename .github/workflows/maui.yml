@@ -24,7 +24,7 @@ jobs:
             matrix:
                 include:
                     - os: windows-latest
-                      configuration: Release
+                      configuration: Debug
                     - os: macos-13
                       configuration: Debug
                     #-   os: ubuntu-latest - Workload ID maui isn't supported on this platform.
