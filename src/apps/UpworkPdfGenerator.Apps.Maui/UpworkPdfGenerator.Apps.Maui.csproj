@@ -15,7 +15,7 @@
 		<ApplicationTitle>UpworkPdfGenerator</ApplicationTitle>
 
 		<!-- App Identifier -->
-		<ApplicationId>com.companyname.upworkpdfgenerator</ApplicationId>
+		<ApplicationId>com.havendv.upworkpdfgenerator</ApplicationId>
 		<ApplicationIdGuid>d046df01-6739-468e-8e86-ecef86b8caa5</ApplicationIdGuid>
 
 		<!-- Versions -->
