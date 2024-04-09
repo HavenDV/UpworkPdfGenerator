@@ -1,106 +1,105 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Globalization;
-using Mvvm.CommonInteractions;
-using UpworkPdfGenerator.App.Properties;
 using UpworkPdfGenerator.Core;
 
 namespace UpworkPdfGenerator.Apps;
 
-public partial class MainViewModel : ObservableObject
+public partial class MainViewModel(
+    ILauncher launcher,
+    IFilePicker filePicker,
+    IPreferences preferences)
+    : ObservableObject
 {
-    private IFileInteractions FileInteractions { get; }
-    private IWebInteractions WebInteractions { get; }
-    
-    [ObservableProperty]
-    private DateTime? _selectedDate;
-
-    [ObservableProperty]
-    private string _sign = string.Empty;
-
-    [ObservableProperty]
-    private string _contractorRus = string.Empty;
-
-    [ObservableProperty]
-    private string _contractorEng = string.Empty;
-
-    [ObservableProperty]
-    private double? _value;
-
-    public MainViewModel(
-        IFileInteractions fileInteractions,
-        IWebInteractions webInteractions)
+    public DateTime SelectedDate
     {
-        FileInteractions = fileInteractions ?? throw new ArgumentNullException(nameof(fileInteractions));
-        WebInteractions = webInteractions ?? throw new ArgumentNullException(nameof(webInteractions));
-        
-        var settings = Settings.Default;
-        if (settings.UpgradeRequired)
+        get => preferences.Get(nameof(SelectedDate), DateTime.UtcNow);
+        set
         {
-            settings.Upgrade();
-            settings.UpgradeRequired = false;
-            settings.Save();
+            preferences.Set(nameof(SelectedDate), value);
+            OnPropertyChanged();
         }
+    }
 
-        SelectedDate = DateTime.UtcNow;
-        Sign = settings.Sign;
-        ContractorRus = settings.ContractorRus;
-        ContractorEng = settings.ContractorEng;
-        Value = settings.Value;
+    public string Sign
+    {
+        get => preferences.Get(nameof(Sign), string.Empty);
+        set
+        {
+            preferences.Set(nameof(Sign), value);
+            OnPropertyChanged();
+        }
+    }
+
+    public string ContractorRus
+    {
+        get => preferences.Get(nameof(ContractorRus), string.Empty);
+        set
+        {
+            preferences.Set(nameof(ContractorRus), value);
+            OnPropertyChanged();
+        }
+    }
+
+    public string ContractorEng
+    {
+        get => preferences.Get(nameof(ContractorEng), string.Empty);
+        set
+        {
+            preferences.Set(nameof(ContractorEng), value);
+            OnPropertyChanged();
+        }
+    }
+
+    public double Amount
+    {
+        get => preferences.Get(nameof(Amount), 0.0);
+        set
+        {
+            preferences.Set(nameof(Amount), value);
+            OnPropertyChanged();
+        }
     }
 
     [RelayCommand]
     public void Generate()
     {
-        var settings = Settings.Default;
-        settings.Sign = Sign;
-        settings.ContractorRus = ContractorRus;
-        settings.ContractorEng = ContractorEng;
-        settings.Value = Convert.ToDouble(Value);
-        settings.Save();
-
         using var destinationStream = new MemoryStream();
-        var signPngBytes = File.Exists(settings.Sign)
-            ? File.ReadAllBytes(settings.Sign)
+        var signPngBytes = File.Exists(Sign)
+            ? File.ReadAllBytes(Sign)
             : Array.Empty<byte>();
 
         var date = SelectedDate;
         PdfGenerator.GenerateConfirmationOfServicesForm(
             destinationStream,
             signPngBytes,
-            settings.ContractorRus ?? string.Empty,
-            settings.ContractorEng ?? string.Empty,
-            settings.Value,
+            ContractorRus,
+            ContractorEng,
+            Amount,
             date);
 
         var bytes = destinationStream.ToArray();
         var path = Path.Combine(
             Path.GetTempPath(),
-            $"Confirmation of Services Form - {date?.ToString("MMMM dd, yyyy", CultureInfo.InvariantCulture)}.pdf");
+            $"Confirmation of Services Form - {date.ToString("MMMM dd, yyyy", CultureInfo.InvariantCulture)}.pdf");
 
         File.WriteAllBytes(path, bytes);
 
-        _ = WebInteractions.OpenUrlAsync(new Uri(path));
+        _ = launcher.OpenAsync(new Uri(path));
     }
 
     [RelayCommand]
     public async Task BrowseSign(CancellationToken cancellationToken = default)
     {
-        var file = await FileInteractions.OpenFileAsync(new OpenFileArguments
+        var file = await filePicker.PickAsync(new PickOptions
         {
-            SuggestedFileName = "sign.png",
-            Extensions = new[] { ".png" },
-            FilterName = "PNG Files",
-        }, cancellationToken).ConfigureAwait(true);
+            PickerTitle = "Select your signature image",
+        });
         if (file == null)
         {
             return;
         }
 
         Sign = file.FullPath;
-
-        var settings = Settings.Default;
-        settings.Sign = Sign;
-        settings.Save();
     }
 }

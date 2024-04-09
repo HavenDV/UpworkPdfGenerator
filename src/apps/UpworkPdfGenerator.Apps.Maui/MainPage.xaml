@@ -51,8 +51,8 @@
                 <Entry Text="{Binding ContractorRus, Mode=TwoWay}" />
                 <Label Text="Contractor(eng):" />
                 <Entry Text="{Binding ContractorEng, Mode=TwoWay}" />
-                <Label Text="Cost:" />
-                <Entry Text="{Binding Value, Mode=TwoWay}" />
+                <Label Text="Amount:" />
+                <Entry Text="{Binding Amount, Mode=TwoWay}" />
                 <Button
                     Command="{Binding GenerateCommand}"
                     Text="Create"

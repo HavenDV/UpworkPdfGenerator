@@ -1,14 +1,12 @@
-﻿using Mvvm.CommonInteractions;
-
-namespace UpworkPdfGenerator.Apps;
+﻿namespace UpworkPdfGenerator.Apps;
 
 public partial class MainPage
 {
-	public MainPage()
+	public MainPage(MainViewModel viewModel)
 	{
 		InitializeComponent();
 
-		BindingContext = new MainViewModel(new FileInteractions(), new WebInteractions());
+		BindingContext = viewModel;
 	}
 }
 
