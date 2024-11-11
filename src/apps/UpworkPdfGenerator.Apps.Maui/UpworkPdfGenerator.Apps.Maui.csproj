@@ -8,7 +8,7 @@
 		<OutputType>Exe</OutputType>
 		<RootNamespace>UpworkPdfGenerator</RootNamespace>
 		<UseMaui>true</UseMaui>
-		<MauiVersion>8.0.20</MauiVersion>
+		<MauiVersion>8.0.93</MauiVersion>
 		<SingleProject>true</SingleProject>
 		<ImplicitUsings>enable</ImplicitUsings>
 
@@ -54,7 +54,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.1" />
 	</ItemGroup>
 
 	<ItemGroup>
