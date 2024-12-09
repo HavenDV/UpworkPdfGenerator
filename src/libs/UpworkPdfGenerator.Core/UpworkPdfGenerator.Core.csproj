@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <UseMaui>true</UseMaui>
-    <MauiVersion>8.0.80</MauiVersion>
+    <MauiVersion>9.0.12</MauiVersion>
   </PropertyGroup>
 
   <ItemGroup>
