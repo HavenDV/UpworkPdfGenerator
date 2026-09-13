@@ -25,9 +25,9 @@ public static class MauiProgram
 			;
 		
 		builder.Services
-			.AddSingleton<IFilePicker>(_ => FilePicker.Default)
-			.AddSingleton<ILauncher>(_ => Launcher.Default)
-			.AddSingleton<IPreferences>(_ => Preferences.Default)
+			.AddSingleton<IFilePicker, MauiFilePicker>()
+			.AddSingleton<ILauncher, MauiLauncher>()
+			.AddSingleton<IPreferences, MauiPreferences>()
 			;
 
 		return builder.Build();

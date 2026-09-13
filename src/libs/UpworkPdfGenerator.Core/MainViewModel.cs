@@ -91,15 +91,14 @@ public partial class MainViewModel(
     [RelayCommand]
     public async Task BrowseSign(CancellationToken cancellationToken = default)
     {
-        var file = await filePicker.PickAsync(new PickOptions
-        {
-            PickerTitle = "Select your signature image",
-        });
-        if (file == null)
+        var path = await filePicker.PickAsync(
+            "Select your signature image",
+            cancellationToken).ConfigureAwait(true);
+        if (path == null)
         {
             return;
         }
 
-        Sign = file.FullPath;
+        Sign = path;
     }
 }
